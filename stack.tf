@@ -4,8 +4,8 @@ resource "spacelift_stack" "managed" {
   name        = "Managed stack"
   description = "Your first stack managed by Terraform"
 
-  repository   = "terraform-starter"
-  branch       = "main"
+  repository   = "SpaceLiftDemo"
+  branch       = "master"
   project_root = "managed-stack"
 
   autodeploy = true
