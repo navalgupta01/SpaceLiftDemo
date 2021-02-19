@@ -6,7 +6,7 @@
 # You can read more about access policies here:
 #
 # https://docs.spacelift.io/concepts/policy/stack-access-policy
-resource "spacelift_policy" "access" {
+resource "spacelift_policy" "accesspolicy" {
   type = "ACCESS"
 
   name = "All of Engineering gets read access"
@@ -15,7 +15,7 @@ resource "spacelift_policy" "access" {
 
 # Access policies only take effect when attached to the stack.
 resource "spacelift_policy_attachment" "access" {
-  policy_id = spacelift_policy.access.id
+  policy_id = spacelift_policy.accesspolicy.id
   stack_id  = spacelift_stack.managed.id
 }
 
@@ -27,7 +27,7 @@ resource "spacelift_policy_attachment" "access" {
 # You can read more about plan policies here:
 #
 # https://docs.spacelift.io/concepts/policy/terraform-plan-policy
-resource "spacelift_policy" "plan" {
+resource "spacelift_policy" "planpolicy" {
   type = "PLAN"
 
   name = "Enforce password strength"
@@ -36,7 +36,7 @@ resource "spacelift_policy" "plan" {
 
 # Plan policies only take effect when attached to the stack.
 resource "spacelift_policy_attachment" "plan" {
-  policy_id = spacelift_policy.plan.id
+  policy_id = spacelift_policy.planpolicy.id
   stack_id  = spacelift_stack.managed.id
 }
 
@@ -50,7 +50,7 @@ resource "spacelift_policy_attachment" "plan" {
 # You can read more about push policies here:
 #
 # https://docs.spacelift.io/concepts/policy/git-push-policy
-resource "spacelift_policy" "push" {
+resource "spacelift_policy" "pushpolicy" {
   type = "GIT_PUSH"
 
   name = "Ignore commits outside the project root"
@@ -59,7 +59,7 @@ resource "spacelift_policy" "push" {
 
 # Push policies only take effect when attached to the stack.
 resource "spacelift_policy_attachment" "push" {
-  policy_id = spacelift_policy.push.id
+  policy_id = spacelift_policy.pushpolicy.id
   stack_id  = spacelift_stack.managed.id
 }
 
@@ -70,7 +70,7 @@ resource "spacelift_policy_attachment" "push" {
 # You can read more about task policies here:
 #
 # https://docs.spacelift.io/concepts/policy/task-run-policy
-resource "spacelift_policy" "task" {
+resource "spacelift_policy" "taskpolicy" {
   type = "TASK"
 
   name = "Allow only safe commands"
@@ -79,7 +79,7 @@ resource "spacelift_policy" "task" {
 
 # Task policies only take effect when attached to the stack.
 resource "spacelift_policy_attachment" "task" {
-  policy_id = spacelift_policy.task.id
+  policy_id = spacelift_policy.taskpolicy.id
   stack_id  = spacelift_stack.managed.id
 }
 
@@ -91,7 +91,7 @@ resource "spacelift_policy_attachment" "task" {
 # You can read more about trigger policies here:
 #
 # https://docs.spacelift.io/concepts/policy/trigger-policy
-resource "spacelift_policy" "trigger" {
+resource "spacelift_policy" "triggerpolicy" {
   type = "TRIGGER"
 
   name = "Trigger stacks that declare an explicit dependency"
@@ -100,14 +100,14 @@ resource "spacelift_policy" "trigger" {
 
 # Trigger policies only take effect when attached to the stack.
 resource "spacelift_policy_attachment" "trigger" {
-  policy_id = spacelift_policy.trigger.id
+  policy_id = spacelift_policy.triggerpolicy.id
   stack_id  = spacelift_stack.managed.id
 }
 
 # Let's attach the policy to the current stack, so that the child stack is
 # triggered, too.
 resource "spacelift_policy_attachment" "trigger-self" {
-  policy_id = spacelift_policy.trigger.id
+  policy_id = spacelift_policy.triggerpolicy.id
   stack_id  = data.spacelift_current_stack.this.id
 }
 
@@ -122,7 +122,7 @@ resource "spacelift_policy_attachment" "trigger-self" {
 # You can read more about login policies here:
 #
 # https://docs.spacelift.io/concepts/policy/login-policy
-resource "spacelift_policy" "login" {
+resource "spacelift_policy" "loginpolicy" {
   type = "LOGIN"
 
   name = "DevOps are admins"
